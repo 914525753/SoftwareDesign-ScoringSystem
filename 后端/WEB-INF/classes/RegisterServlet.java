@@ -16,7 +16,7 @@ public class RegisterServlet extends HttpServlet {
 
     // 数据库的用户名与密码，需要根据自己的设置
     static final String USER = "root";
-    static final String PASS = "";
+    static final String PASS = "qertyiop1a";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //获取用户名、密码、权限、昵称
-            String username = request.getParameter("name");
+            String username = request.getParameter("username");
             String password = request.getParameter("password");
             String nickname = username;
 
@@ -63,17 +63,17 @@ public class RegisterServlet extends HttpServlet {
                     {
                         request.getSession().setAttribute("userid", SelectIdRs.getString("userid"));
                     }
-                    request.getSession().setAttribute("level", level);
-                    out.write(1); //1代表注册成功
+                    request.getSession().setAttribute("level", "1");
+                    out.write("1"); //1代表注册成功
                     //完成后关闭
                     SelectIdRs.close();
                 }else{
-                    out.write(2); //2代表已经被人抢注
+                    out.write("2"); //2代表已经被人抢注
                 }
             }
             else
             {
-                out.write(3); //3代表帐号已存在
+                out.write("3"); //3代表帐号已存在
             }
 
 //             完成后关闭
