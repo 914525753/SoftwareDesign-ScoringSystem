@@ -15,24 +15,24 @@ import java.sql.*;
 @WebServlet("/LoginServlet2")
 public class LoginServlet2 extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    // JDBC Çı¶¯Ãû¼°Êı¾İ¿â URL
+    // JDBC é©±åŠ¨ååŠæ•°æ®åº“ URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql:///bearcome?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false";
 
-    // Êı¾İ¿âµÄÓÃ»§ÃûÓëÃÜÂë£¬ĞèÒª¸ù¾İ×Ô¼ºµÄÉèÖÃ
+    // æ•°æ®åº“çš„ç”¨æˆ·åä¸å¯†ç ï¼Œéœ€è¦æ ¹æ®è‡ªå·±çš„è®¾ç½®
     static final String USER = "root";
     static final String PASS = "qertyiop1a";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         String method = req.getParameter("method");
         if (method.equals( "WeChatLogin") && method != null) {
             this.WeChatLogin(req, resp);
         }else if (method.equals( "PasswordLogin") && method != null) {
             this.PasswordLogin(req, resp);
         }
-        //ÆäËû·½·¨else ifÌí¼Ó
+        //å…¶ä»–æ–¹æ³•else ifæ·»åŠ 
     }
 
     @Override
@@ -45,29 +45,31 @@ public class LoginServlet2 extends HttpServlet {
     {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        // ÉèÖÃÏìÓ¦ÄÚÈİÀàĞÍ
+        // è®¾ç½®å“åº”å†…å®¹ç±»å‹
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
         try{
-            // ×¢²á JDBC Çı¶¯Æ÷
+            // æ³¨å†Œ JDBC é©±åŠ¨å™¨
             Class.forName(JDBC_DRIVER);
 
-            // ´ò¿ªÒ»¸öÁ¬½Ó
+            // æ‰“å¼€ä¸€ä¸ªè¿æ¥
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-            String appId = "wx11bcb2ca804aa5ef";
-            String appSecret = "f2a18068fb6a0bf19dead1995e7b8657";
+            String appId2 = "d3gxMWJjYjJjYTgwNGFhNWVm";
+            String appSecret2 = "ZjJhMTgwNjhmYjZhMGJmMTlkZWFkMTk5NWU3Yjg2NTc=";
 
-            //»ñÈ¡ÃÜÂë¡¢êÇ³Æ
+            String appId = Base64Utils.decode(appId2);
+            String appSecret = Base64Utils.decode(appSecret2);
+            //è·å–å¯†ç ã€æ˜µç§°
             String nickname = request.getParameter("nickname");
             String code = request.getParameter("code");
             String username = nickname;
 
-            //ÓÃcode»»È¡openID
-            String open = new WeChatRequest().open(appId,appSecret,code);
+            //ç”¨codeæ¢å–openID
+            String open = new LoginServlet2().open(appId,appSecret,code);
 
-            //json×ª»»ÊµÌåWeChatÀà
+            //jsonè½¬æ¢å®ä½“WeChatç±»
             Gson gson = new Gson();
             WeChatPojo WeChat = gson.fromJson(open, WeChatPojo.class);
             String openid = WeChat.getOpenid();
@@ -84,7 +86,7 @@ public class LoginServlet2 extends HttpServlet {
                 pstmt.setString(1,openid);
                 ResultSet rs = pstmt.executeQuery();
                 if(!rs.first()) {
-                    // Ö´ĞĞ SQL
+                    // æ‰§è¡Œ SQL
                     String ReplaceSql = "insert into users(nickname,WeChatCode,level,name) values(?,?,?,?);";
                     pstmt = conn.prepareStatement(ReplaceSql);
                     pstmt.setString(1,nickname);
@@ -102,11 +104,11 @@ public class LoginServlet2 extends HttpServlet {
                             request.getSession().setAttribute("userid", SelectIdRs.getString("userid"));
                         }
                         request.getSession().setAttribute("level", 1);
-                        out.write("3"); //1´ú±í×¢²á³É¹¦
-                        //Íê³Éºó¹Ø±Õ
+                        out.write("3"); //1ä»£è¡¨æ³¨å†ŒæˆåŠŸ
+                        //å®Œæˆåå…³é—­
                         SelectIdRs.close();
                     }else{
-                        out.write("4"); //2´ú±íÒÑ¾­±»ÈËÇÀ×¢
+                        out.write("4"); //2ä»£è¡¨å·²ç»è¢«äººæŠ¢æ³¨
                     }
                 }
                 else
@@ -120,23 +122,23 @@ public class LoginServlet2 extends HttpServlet {
                         request.getSession().setAttribute("userid", SelectIdRs.getString("userid"));
                     }
                     request.getSession().setAttribute("level", 1);
-                    out.write("1"); //1´ú±í×¢²á³É¹¦
+                    out.write("1"); //1ä»£è¡¨æ³¨å†ŒæˆåŠŸ
                 }
                 rs.close();
             }
 
 
-            // Íê³Éºó¹Ø±Õ
+            // å®Œæˆåå…³é—­
             pstmt.close();
             conn.close();
         } catch(SQLException se) {
-            // ´¦Àí JDBC ´íÎó
+            // å¤„ç† JDBC é”™è¯¯
             se.printStackTrace();
         } catch(Exception e) {
-            // ´¦Àí Class.forName ´íÎó
+            // å¤„ç† Class.forName é”™è¯¯
             e.printStackTrace();
         }finally{
-            // ×îºóÊÇÓÃÓÚ¹Ø±Õ×ÊÔ´µÄ¿é
+            // æœ€åæ˜¯ç”¨äºå…³é—­èµ„æºçš„å—
             try{
                 if(pstmt!=null)
                     pstmt.close();
@@ -156,28 +158,28 @@ public class LoginServlet2 extends HttpServlet {
     {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        //ÅĞ¶ÏÊÇ·ñµÇÂ¼³É¹¦
+        //åˆ¤æ–­æ˜¯å¦ç™»å½•æˆåŠŸ
         boolean IsLogin=false;
 
 
-        // ÉèÖÃÏìÓ¦ÄÚÈİÀàĞÍ
+        // è®¾ç½®å“åº”å†…å®¹ç±»å‹
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
         try{
-            // ×¢²á JDBC Çı¶¯Æ÷
+            // æ³¨å†Œ JDBC é©±åŠ¨å™¨
             Class.forName(JDBC_DRIVER);
-            // ´ò¿ªÒ»¸öÁ¬½Ó
+            // æ‰“å¼€ä¸€ä¸ªè¿æ¥
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            //»ñÈ¡ÓÃ»§ÃûºÍÃÜÂë
+            //è·å–ç”¨æˆ·åå’Œå¯†ç 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
             System.out.print(username);
             System.out.print(password);
-            //MD5¼ÓÃÜ
+            //MD5åŠ å¯†
             String code = MD5Utils.stringToMD5(password);
 
-            // Ö´ĞĞ SQL ²éÑ¯
+            // æ‰§è¡Œ SQL æŸ¥è¯¢
             String sql;
             sql = "select * from users where name=?;";
             pstmt = conn.prepareStatement(sql);
@@ -185,7 +187,7 @@ public class LoginServlet2 extends HttpServlet {
             ResultSet rs = pstmt.executeQuery();
 
             while(rs.next()) {
-                // Í¨¹ı×Ö¶Î¼ìË÷
+                // é€šè¿‡å­—æ®µæ£€ç´¢
                 if (rs.getString("password").equals(code)) {
                     request.getSession().setAttribute("userid", rs.getString("userid"));
                     request.getSession().setAttribute("level", rs.getString("level"));
@@ -200,20 +202,20 @@ public class LoginServlet2 extends HttpServlet {
                 out.write("2");
             }
 
-            // Íê³Éºó¹Ø±Õ
+            // å®Œæˆåå…³é—­
             System.out.print(request.getSession().getAttribute("userid"));
             System.out.print(request.getSession().getAttribute("level"));
             rs.close();
             pstmt.close();
             conn.close();
         } catch(SQLException se) {
-            // ´¦Àí JDBC ´íÎó
+            // å¤„ç† JDBC é”™è¯¯
             se.printStackTrace();
         } catch(Exception e) {
-            // ´¦Àí Class.forName ´íÎó
+            // å¤„ç† Class.forName é”™è¯¯
             e.printStackTrace();
         }finally{
-            // ×îºóÊÇÓÃÓÚ¹Ø±Õ×ÊÔ´µÄ¿é
+            // æœ€åæ˜¯ç”¨äºå…³é—­èµ„æºçš„å—
             try{
                 if(pstmt!=null)
                     pstmt.close();
@@ -231,25 +233,25 @@ public class LoginServlet2 extends HttpServlet {
     public String open(String appId,String appSecret,String code) throws HttpProcessException {
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appId+"&secret="+appSecret+"&js_code="+code+"&grant_type=authorization_code";
 
-        //²å¼şÊ½ÅäÖÃÇëÇó²ÎÊı£¨ÍøÖ·¡¢ÇëÇó²ÎÊı¡¢±àÂë¡¢client£©
+        //æ’ä»¶å¼é…ç½®è¯·æ±‚å‚æ•°ï¼ˆç½‘å€ã€è¯·æ±‚å‚æ•°ã€ç¼–ç ã€clientï¼‰
         HttpConfig config = HttpConfig.custom()
-//                .headers(headers)	//ÉèÖÃheaders£¬²»ĞèÒªÊ±ÔòÎŞĞèÉèÖÃ
-                .timeout(1000) 		//³¬Ê±
-                .url(url)           //ÉèÖÃÇëÇóµÄurl
-//                .map(map)			//ÉèÖÃÇëÇó²ÎÊı£¬Ã»ÓĞÔòÎŞĞèÉèÖÃ
-                .encoding("utf-8")  //ÉèÖÃÇëÇóºÍ·µ»Ø±àÂë£¬Ä¬ÈÏ¾ÍÊÇCharset.defaultCharset()
-//                .client(client)     //Èç¹ûÖ»ÊÇ¼òµ¥Ê¹ÓÃ£¬ÎŞĞèÉèÖÃ£¬»á×Ô¶¯»ñÈ¡Ä¬ÈÏµÄÒ»¸öclient¶ÔÏó
-                .inenc("utf-8")   //ÉèÖÃÇëÇó±àÂë£¬Èç¹ûÇëÇó·µ»ØÒ»Ö±£¬²»ĞèÒªÔÙµ¥¶ÀÉèÖÃ
-                .inenc("utf-8")   //ÉèÖÃ·µ»Ø±àÂë£¬Èç¹ûÇëÇó·µ»ØÒ»Ö±£¬²»ĞèÒªÔÙµ¥¶ÀÉèÖÃ
-//                .json("json×Ö·û´®") //json·½Ê½ÇëÇóµÄ»°£¬¾Í²»ÓÃÉèÖÃmap·½·¨£¬µ±È»¶şÕß¿ÉÒÔ¹²ÓÃ¡£
-//                .context(HttpCookies.custom().getContext())      //ÉèÖÃcookie£¬ÓÃÓÚÍê³ÉĞ¯´øcookieµÄ²Ù×÷
-//                .out(new FileOutputStream("±£´æµØÖ·"))              //ÏÂÔØµÄ»°£¬ÉèÖÃÕâ¸ö·½·¨,·ñÔò²»ÒªÉèÖÃ
-//                .files(new String[]{"d:/1.txt","d:/2.txt"})      //ÉÏ´«µÄ»°£¬´«µİÎÄ¼şÂ·¾¶£¬Ò»°ã»¹ĞèmapÅäÖÃ£¬ÉèÖÃ·şÎñÆ÷±£´æÂ·¾¶
+//                .headers(headers)	//è®¾ç½®headersï¼Œä¸éœ€è¦æ—¶åˆ™æ— éœ€è®¾ç½®
+                .timeout(1000) 		//è¶…æ—¶
+                .url(url)           //è®¾ç½®è¯·æ±‚çš„url
+//                .map(map)			//è®¾ç½®è¯·æ±‚å‚æ•°ï¼Œæ²¡æœ‰åˆ™æ— éœ€è®¾ç½®
+                .encoding("utf-8")  //è®¾ç½®è¯·æ±‚å’Œè¿”å›ç¼–ç ï¼Œé»˜è®¤å°±æ˜¯Charset.defaultCharset()
+//                .client(client)     //å¦‚æœåªæ˜¯ç®€å•ä½¿ç”¨ï¼Œæ— éœ€è®¾ç½®ï¼Œä¼šè‡ªåŠ¨è·å–é»˜è®¤çš„ä¸€ä¸ªclientå¯¹è±¡
+                .inenc("utf-8")   //è®¾ç½®è¯·æ±‚ç¼–ç ï¼Œå¦‚æœè¯·æ±‚è¿”å›ä¸€ç›´ï¼Œä¸éœ€è¦å†å•ç‹¬è®¾ç½®
+                .inenc("utf-8")   //è®¾ç½®è¿”å›ç¼–ç ï¼Œå¦‚æœè¯·æ±‚è¿”å›ä¸€ç›´ï¼Œä¸éœ€è¦å†å•ç‹¬è®¾ç½®
+//                .json("jsonå­—ç¬¦ä¸²") //jsonæ–¹å¼è¯·æ±‚çš„è¯ï¼Œå°±ä¸ç”¨è®¾ç½®mapæ–¹æ³•ï¼Œå½“ç„¶äºŒè€…å¯ä»¥å…±ç”¨ã€‚
+//                .context(HttpCookies.custom().getContext())      //è®¾ç½®cookieï¼Œç”¨äºå®Œæˆæºå¸¦cookieçš„æ“ä½œ
+//                .out(new FileOutputStream("ä¿å­˜åœ°å€"))              //ä¸‹è½½çš„è¯ï¼Œè®¾ç½®è¿™ä¸ªæ–¹æ³•,å¦åˆ™ä¸è¦è®¾ç½®
+//                .files(new String[]{"d:/1.txt","d:/2.txt"})      //ä¸Šä¼ çš„è¯ï¼Œä¼ é€’æ–‡ä»¶è·¯å¾„ï¼Œä¸€èˆ¬è¿˜éœ€mapé…ç½®ï¼Œè®¾ç½®æœåŠ¡å™¨ä¿å­˜è·¯å¾„
                 ;
 
-        //Ê¹ÓÃ·½Ê½£º
-        String result = HttpClientUtil.get(config);    //getÇëÇó
-//    String result2 = HttpClientUtil.post(config);   //postÇëÇó
+        //ä½¿ç”¨æ–¹å¼ï¼š
+        String result = HttpClientUtil.get(config);    //getè¯·æ±‚
+//    String result2 = HttpClientUtil.post(config);   //postè¯·æ±‚
         return result;
     }
 }
