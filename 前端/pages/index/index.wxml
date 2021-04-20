@@ -9,6 +9,7 @@
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
+    <text class="user-motto">hello world</text>
   </view>
   <view class="usermotto">
     <button bindtap="OnClick">login</button>
