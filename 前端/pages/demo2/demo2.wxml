@@ -12,9 +12,20 @@
   <button class="trueButton">确认提交</button>
 </view>
 
-<view class="card">
-  <scroll-view scroll-y="true">
-    <view>111</view>
+<view class="container">
+  <scroll-view class="list" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view class="text_2">
+      <view >选手编号：1</view>
+      <view >用户昵称：</view>
+    </view>
+    <view class="text_1">111</view>
+    <view class="text_1">111</view>
+    <view class="text_1">111</view>
+    <view class="text_1">111</view>
+    <view class="text_1">111</view>
+    <view class="text_1">111</view>
+    <view class="text_1">111</view>
+    <view class="text_1">111</view>
   </scroll-view>
 </view>
 

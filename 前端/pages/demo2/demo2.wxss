@@ -37,7 +37,7 @@ page {
   position: relative; 
   left: 30rpx; 
   top: -188rpx;
-  z-index:6;
+  z-index:7;
   background:#5b6faa;
   border-radius: 15px;
   box-shadow: 0rpx 8rpx 12rpx 2rpx #4b4b4b;
@@ -66,10 +66,11 @@ page {
   position: relative; 
   display: block; 
   box-sizing: border-box;
+  z-index: 7;
 }
 
 .trueButton{
-  z-index: 6;
+  z-index: 8;
   background-color: #6d9ebf; 
   border-radius: 24rpx; 
   border: 5rpx solid #ffffff; 
@@ -80,15 +81,58 @@ page {
   top: 645rpx;
 }
 
-.card{
+.container{
+  display: flex;
+  position: relative;
+  width: 700rpx;
+  height: 600rpx;
+  z-index: 6;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  top: -227rpx;
+  margin:0 auto;
+}
+
+
+.text_1{
   background:#7faccb;
   color:white;
-  width: 550rpx;
-  height: 400rpx;
+  width: 650rpx;
+  height: 200rpx;
   position: relative;
   top: 34rpx;
   border-radius: 15px;
   box-shadow: 0rpx 8rpx 12rpx 2rpx #4b4b4b;
-  display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  overflow:hidden;
+  white-space: nowrap ;
+  margin-top:20rpx;
+  margin-right:20rpx;
+  margin-left:20rpx;
+  font-size: 40rpx;
+}
+
+.text_2{
+  background:#7faccb;
+  color:white;
+  width: 650rpx;
+  height: 200rpx;
+  position: relative;
+  top: 34rpx;
+  border-radius: 15px;
+  box-shadow: 0rpx 8rpx 12rpx 2rpx #4b4b4b;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow:hidden;
+  white-space: nowrap ;
+  margin-right:20rpx;
+  margin-left:20rpx;
+  font-size: 40rpx;
+}
+
+.list{
+  width: 700rpx;
+  height: 1000rpx;
 }
