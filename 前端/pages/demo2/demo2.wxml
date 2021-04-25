@@ -1,0 +1,20 @@
+<view class="top"> </view>
+
+<view class="topText_1"> </view>
+
+<view class="matchName"> 比赛名称：</view>
+
+<view class="topText_2"> </view>
+
+<view class="bottom"> </view>
+
+<view>
+  <button class="trueButton">确认提交</button>
+</view>
+
+<view class="card">
+  <scroll-view scroll-y="true">
+    <view>111</view>
+  </scroll-view>
+</view>
+

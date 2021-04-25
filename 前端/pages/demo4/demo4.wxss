@@ -1,0 +1,25 @@
+page{
+  background: #c9e9fe;
+}
+
+.card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.all{
+  background:#5b6faa;
+  color:white;
+  width: 550rpx;
+  height: 400rpx;
+  position: relative;
+  top: 34rpx;
+  border-radius: 15px;
+  box-shadow: 0rpx 8rpx 12rpx 2rpx #4b4b4b;
+  display: flex;
+  flex-direction: column;
+  
+}
+

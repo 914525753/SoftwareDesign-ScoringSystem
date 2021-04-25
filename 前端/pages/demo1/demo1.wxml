@@ -1,0 +1,64 @@
+<!--pages/demo1/demo1.wxml-->
+<form bindsubmit="formSubmit" bindreset="formReset">
+
+  <view class="name Left">
+    <view class="title_1">比赛名称</view>
+      <view class="text_1">
+        <input placeholder="请输入比赛名称" />
+      </view>
+  </view>
+
+  <view class="describe" >
+    <textarea placeholder="请输入对该比赛的描述">
+    </textarea>
+  </view>
+
+  <view class="number Left">
+    <view class="title_2">最大参赛人数</view>
+    <input class="lineHeight"  placeholder="请输入最大参赛人数" />
+  </view>
+
+</form>
+
+<view class="startTime Left">
+  <view class="lineHeight1">开始报名时间</view>
+    <picker mode="date" bindchange="bindMultiPickerChange">
+    <input class="timeText_1" disabled="true" value='{{time}}' placeholder='选择开始时间' />
+  </picker>
+  </view>
+
+<view class="deadline">
+  <view class="lineHeight2">截止报名时间</view>
+    <picker class="timeText_2" mode="date" bindchange="bindMultiPickerChange1">
+    <input disabled="true" value='{{time1}}' placeholder='选择截止时间' />
+  </picker>
+</view>
+
+<view class="flex">
+  <view class="big_1"> </view>
+  <view class="small_1"> </view>
+
+  <view class="big_2"> </view>
+  <view class="small_2"> </view>
+
+  <view class="big_3"> </view>
+  <view class="small_3"> </view>
+
+</view>
+
+<view>
+  <view class="inputBox_1"> </view>
+  <view class="inputBox_2"> </view>
+</view>
+
+<view class="big_4"> </view>
+<view class="small_4"> </view>
+
+<view>
+  <button hover-class="btn-hover" class="trueButton">确 定</button>
+</view>
+
+<view>
+  <scroll-y class=""> </scroll-y>
+</view>
+
