@@ -6,5 +6,6 @@
     <view class="deadline">评审时间：</view>
     <view class="nowNumber">当前参赛人数：</view>
     <view class="maxNumber">最大参赛人数：</view>
+    <image class="editor" src="/image/editor.png"></image>
   </view>
 </view>
