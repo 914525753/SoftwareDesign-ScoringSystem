@@ -4,9 +4,23 @@ textarea,input
   border: 2px solid #d1d1d1;
   margin-bottom: 10px;
 }
+page{background: #BEEAFE;}
 
-.t1
-{
-  display:flex;
-  justify-content:center;
-}
+.top_name{padding:20rpx 20rpx 5rpx 20rpx;
+width:85%;
+margin:0 auto;
+border-radius: 15rpx;
+background: #95c2e1;box-shadow: 0rpx 7rpx 10rpx 2rpx #888888;}
+.top_name text{color:#fff;line-height: 44rpx;padding-bottom: 10rpx;display: block;
+padding-left: 10rpx;}
+.top_name input{line-height: 54rpx;border:none;background:#fff;display: block;
+height: 54rpx;border-radius:10rpx ;padding-left: 20rpx;border: 3rpx solid #919191;}
+
+.MarginTop{margin-top:20rpx}
+
+.textarea {padding-bottom:20rpx;}
+.textarea textarea{width:calc(99% - 60rpx);margin: 0 auto;border: none;background: #fff;border-radius: 10rpx;padding: 30rpx;border: 3rpx solid #919191;}
+
+.button{width:35%;color:#fff;text-align: center;line-height: 76rpx;height: 76rpx;
+padding: 0;margin-top:40rpx;font-size: 38rpx;border-radius: 24rpx;
+border: 5rpx solid #ffffff;}

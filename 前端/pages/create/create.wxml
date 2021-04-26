@@ -1,20 +1,32 @@
 <!--pages/create/create.wxml-->
 <view>
-    <text class = "t1">创建比赛</text>
     <form bindsubmit="formSubmit">
-        <text>比赛名称</text>
-        <input name = "name"></input>
-        <textarea class = "areas" placeholder = "请输入该比赛的描述" name = "desc"></textarea>
-        <text>最大参赛人数</text>
-        <input name = "max" type = "number"></input>
-        <text>比赛开始时间</text>
-        <picker mode = "multiSelector" bindchange = "bindMultiPickerChange" bindcolumnchange = "bindMultiPickerColumnChange" value = "{{multiIndex}}" range = "{{multiArray}}">
-            <input value = '{{starttime}}' bindtap = "start" placeholder = '选择时间'/>
-        </picker>
-        <text>比赛结束时间</text>
-        <picker mode = "multiSelector" bindchange = "bindMultiPickerChange" bindcolumnchange = "bindMultiPickerColumnChange" value = "{{multiIndex}}" range = "{{multiArray}}">
-            <input value = '{{endtime}}' bindtap = "end" placeholder = '选择时间'/>
-        </picker>
-        <button form-type="submit">创建比赛</button>
+        <view class="top_name MarginTop">
+            <text>比赛名称</text>
+            <input name = "name" placeholder="请输入比赛名称"></input>
+        </view>
+
+        <view class="textarea top_name MarginTop">
+            <textarea placeholder="请输入对该比赛的描述"></textarea>
+        </view>
+        
+        <view class="top_name MarginTop">
+            <text>最大参赛人数</text>
+            <input name = "name" placeholder="请输入最大参赛人数"></input>
+        </view>
+
+        <view class="top_name MarginTop">
+            <text>开始报名时间</text>
+            <input name = "name" placeholder="请选择开始报名时间"></input>
+        </view>
+        
+        <view class="top_name MarginTop">
+            <text>截止报名时间</text>
+            <input name = "name" placeholder="请选择截止报名时间"></input>
+        </view>
+
+        <view class="top_name button">
+            确定创建
+        </view>
     </form>
 </view>
