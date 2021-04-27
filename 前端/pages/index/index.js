@@ -153,4 +153,10 @@ Page({
     })
   },
   
+  /*按钮事件 - 打开申请评委页*/
+  NavToRequest: function () {
+    wx.navigateTo({
+      url: "/pages/examine/request/request",
+    })
+  },
 })
