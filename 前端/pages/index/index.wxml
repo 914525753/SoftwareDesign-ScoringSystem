@@ -10,7 +10,7 @@
 
       <view wx:if="{{onLine}}" class="textBottom">
         <view class="text">参加比赛项目数:{{joining}}</view>
-        <image src="/image/message.png"></image>
+        <image src="/image/message.png" bindtap="NavToRequest"></image>
       </view>
     </view>
 
