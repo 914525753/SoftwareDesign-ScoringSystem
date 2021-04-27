@@ -1,6 +1,7 @@
 // pages/create/create.js
 var util = require('../../utils/util.js');
 const app = getApp();
+const domain = app.globalData.domain;
 const date = new Date();
 const years = [];
 const months = [];
@@ -70,7 +71,7 @@ Page({
     if(desc != "" && name != "" && max != "" && new Date(starttime) < new Date(endtime))
     {
       wx.request({
-        url: 'http://127.0.0.1:8080/test/CreateContest',
+        url: domain + "/CreateContest",
         header: {
           "Content-Type": "application/x-www-form-urlencoded",
           "Cookie": wx.getStorageSync('JSESSIONID')
@@ -78,31 +79,37 @@ Page({
         method: "POST",
         data: "name=" + name + "&desc=" + desc + "&starttime=" + starttime + "&endtime=" + endtime + "&max=" + max,
         success: function (res) {
-          switch (res.data){
-            case 1:
-              wx.showToast({
-                title: '创建成功',
-                icon: 'success',
-                duration: 2000,
-              });
-              break;
-            case 3:
-              wx.showToast({
-                title: '比赛已存在',
-                icon: 'none',
-                duration: 2000,
-              });
-              break;
-            case 4:
-              wx.showToast({
-                title: '提交失败，请仔细检查相关的参数',
-                icon: 'none',
-                duration: 2000,
-              });
-              break;
-            default:
-              break;
+          
+          console.log(res.data);
+          
+          // 页面交互逻辑
+          if (res.data == "1") {
+            wx.showToast({
+              title: '创建成功',
+              icon: 'success',
+              duration: 1000,
+            })
+            setTimeout(function () {
+              wx.reLaunch({
+                url: "/pages/index/index" // 关闭所有页面并打开主页
+              })
+            }, 1000)
           }
+          else if (res.data == "3") {
+            wx.showToast({
+              title: '比赛已存在',
+              icon: 'none',
+              duration: 2000,
+            })
+          }
+          else if (res.data == "4") {
+            wx.showToast({
+              title: '提交失败，请仔细检查相关的参数',
+              icon: 'none',
+              duration: 2000,
+            })
+          }
+
         },
         fail: function (res) {
           wx.showToast({

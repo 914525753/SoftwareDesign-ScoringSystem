@@ -63,7 +63,7 @@ Page({
               console.log(cookie)
           
               // 页面交互逻辑
-              if (res.data == "1" || res.data == "3") {
+              if (res.data == "11" || res.data == "12" || res.data == "3") {
                 wx.showToast({
                   title: "微信登录成功",
                   duration: 1000
@@ -77,6 +77,13 @@ Page({
               else if(res.data == "2" || res.data == "4") {
                 wx.showToast({
                   title: "微信登录失败",
+                  icon: 'none',
+                  duration: 3000
+                })
+              }
+              else if(res.data == "5") {
+                wx.showToast({
+                  title: "Code换取失败",
                   icon: 'none',
                   duration: 3000
                 })

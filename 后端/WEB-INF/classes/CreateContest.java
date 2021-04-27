@@ -18,11 +18,11 @@ import java.util.Date;
 @WebServlet("/CreateContest")
 public class CreateContest extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    // JDBC Çı¶¯Ãû¼°Êı¾İ¿â URL
+    // JDBC é©±åŠ¨ååŠæ•°æ®åº“ URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
     static final String DB_URL = "jdbc:mysql://localhost:3306/bearcome?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8";
     
-    // Êı¾İ¿âµÄÓÃ»§ÃûÓëÃÜÂë£¬ĞèÒª¸ù¾İ×Ô¼ºµÄÉèÖÃ
+    // æ•°æ®åº“çš„ç”¨æˆ·åä¸å¯†ç ï¼Œéœ€è¦æ ¹æ®è‡ªå·±çš„è®¾ç½®
     static final String USER = "root";
     static final String PASS = "";
     /**
@@ -40,19 +40,21 @@ public class CreateContest extends HttpServlet {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        // ÉèÖÃÏìÓ¦ÄÚÈİÀàĞÍ
+        // è®¾ç½®å“åº”å†…å®¹ç±»å‹
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         try{
-            // ×¢²á JDBC Çı¶¯Æ÷
+            // æ³¨å†Œ JDBC é©±åŠ¨å™¨
             Class.forName(JDBC_DRIVER);
             
-            // ´ò¿ªÒ»¸öÁ¬½Ó
+            // æ‰“å¼€ä¸€ä¸ªè¿æ¥
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             HttpSession session = request.getSession();
             int level = Integer.parseInt(session.getAttribute("level").toString());
             int userid = Integer.parseInt(session.getAttribute("userid").toString());
+            String partake2 = null;
             if(level >= 2)
             {
                 String name = request.getParameter("name");
@@ -108,7 +110,14 @@ public class CreateContest extends HttpServlet {
                                 while(rs.next())
                                 {
                                     String partake = rs.getString("createpartake");
-                                    String partake2 = partake + id + ",";
+                                    if(partake == null)
+                                    {
+                                        partake2 = id + ",";
+                                    }
+                                    else 
+                                    {
+                                        partake2 = partake + id + ",";
+                                    }
                                     sql = "UPDATE judge set createpartake=? where userid="+Integer.toString(userid);
                                     pstmt = conn.prepareStatement(sql);
                                     pstmt.setString(1, partake2);
@@ -120,26 +129,26 @@ public class CreateContest extends HttpServlet {
                                 pstmt.setInt(1, userid);
                                 pstmt.executeUpdate();
 
-                                out.println(1); //´´½¨³É¹¦
+                                out.println(1); //åˆ›å»ºæˆåŠŸ
                             }
                         }
-                    }else out.print(3); //±ÈÈüÒÑ´æÔÚ
-                }else out.print(4); //²ÎÊı´íÎó
+                    }else out.print(3); //æ¯”èµ›å·²å­˜åœ¨
+                }else out.print(4); //å‚æ•°é”™è¯¯
             }
 
 
-            // Íê³Éºó¹Ø±Õ
+            // å®Œæˆåå…³é—­
             rs.close();
             pstmt.close();
             conn.close();
         } catch(SQLException se) {
-            // ´¦Àí JDBC ´íÎó
+            // å¤„ç† JDBC é”™è¯¯
             se.printStackTrace();
         } catch(Exception e) {
-            // ´¦Àí Class.forName ´íÎó
+            // å¤„ç† Class.forName é”™è¯¯
             e.printStackTrace();
         }finally{
-            // ×îºóÊÇÓÃÓÚ¹Ø±Õ×ÊÔ´µÄ¿é
+            // æœ€åæ˜¯ç”¨äºå…³é—­èµ„æºçš„å—
             try{
                 if(pstmt!=null)
                 pstmt.close();

@@ -142,7 +142,7 @@ Page({
   /*按钮事件 - 打开评委权限审核页*/
   NavToAccept: function () {
     wx.navigateTo({
-      url: "/pages/examine/accept/accept",
+      url: "/pages/examine/accept/accept?type=2",
     })
   },
 
@@ -153,4 +153,10 @@ Page({
     })
   },
   
+  /*按钮事件 - 打开申请评委页*/
+  NavToRequest: function () {
+    wx.navigateTo({
+      url: "/pages/examine/request/request",
+    })
+  },
 })

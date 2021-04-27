@@ -16,6 +16,9 @@ Page({
         var data =  "id="+that.data.contestid+"&description="+description+"&action=request&type=2";
       }
       else var data = "description="+description+"&action=request&type=1";
+
+      console.log(data);
+
       wx.request({
         url: domain + "/ExamineJudges",
         header: {
