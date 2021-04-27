@@ -1,20 +1,32 @@
-<!--pages/create/create.wxml-->
-<view>
-    <text class = "t1">创建比赛</text>
-    <form bindsubmit="formSubmit">
-        <text>比赛名称</text>
-        <input name = "name"></input>
-        <textarea class = "areas" placeholder = "请输入该比赛的描述" name = "desc"></textarea>
-        <text>最大参赛人数</text>
-        <input name = "max" type = "number"></input>
-        <text>比赛开始时间</text>
-        <picker mode = "multiSelector" bindchange = "bindMultiPickerChange" bindcolumnchange = "bindMultiPickerColumnChange" value = "{{multiIndex}}" range = "{{multiArray}}">
-            <input value = '{{starttime}}' bindtap = "start" placeholder = '选择时间'/>
-        </picker>
-        <text>比赛结束时间</text>
-        <picker mode = "multiSelector" bindchange = "bindMultiPickerChange" bindcolumnchange = "bindMultiPickerColumnChange" value = "{{multiIndex}}" range = "{{multiArray}}">
-            <input value = '{{endtime}}' bindtap = "end" placeholder = '选择时间'/>
-        </picker>
-        <button form-type="submit">创建比赛</button>
-    </form>
-</view>
+<!--pages/create/create.wxml--> 
+<form bindsubmit="formSubmit">
+    <view class="container-create">
+        <view class="flex-block card">
+            <text class="text-title">比赛名称</text>
+            <input class="textbox" name="name" placeholder="请输入该比赛的名称"></input>
+        </view>
+        <view class="flex-block card">
+            <text class="text-title">比赛描述</text>
+            <textarea class="textbox areas" name="desc" placeholder="请输入该比赛的描述"></textarea>
+        </view>
+        <view class="flex-block card">
+            <text class="text-title">最大参赛人数</text>
+            <input class="textbox" name="max" type="number"></input>
+        </view>
+        <view class="flex-block card">
+            <text class="text-title">比赛开始时间</text>
+            <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                <input class="textbox" value='{{starttime}}' bindtap="start" placeholder='选择时间'/>
+            </picker>
+        </view>
+        <view class="flex-block card">
+            <text class="text-title">比赛结束时间</text>
+            <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                <input class="textbox" value='{{endtime}}' bindtap="end" placeholder='选择时间'/>
+            </picker>
+        </view>
+        <view class="flex-block">
+            <button class="SubmitButton" form-type="submit">创建比赛</button>
+        </view>
+    </view>
+</form>
