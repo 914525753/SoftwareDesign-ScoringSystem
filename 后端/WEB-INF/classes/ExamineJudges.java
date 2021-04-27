@@ -147,7 +147,7 @@ public class ExamineJudges extends HttpServlet {
                     description = request.getParameter("description");
                     userid = Integer.parseInt(session.getAttribute("userid").toString());
                     level = Integer.parseInt(session.getAttribute("level").toString());
-                    if(userid != -1 && level == 1)
+                    if(userid != -1)
                     {
                         if(type == 2)
                         {
