@@ -1,11 +1,74 @@
 /* pages/examine/request/request.wxss */
-textarea
-{
-  border: 2px solid #d1d1d1;
+
+/*flex布局容器*/
+.container-request {
+  background: #c9e9fe;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  height: 100vh;
 }
 
-text
-{
-  display:flex;
-  justify-content:center;
+/*flex项目*/
+.flex-block {
+  display: block;
+  box-sizing: border-box;
+  width: 650rpx;
+
+  position: relative;
+}
+
+
+/*标题*/
+.title {
+  text-align: center;
+  font-size: 60rpx;
+}
+
+
+/*申请原因占位区域*/
+.areas {
+  background: #86cdfd;
+  border-radius: 15px;
+  margin-top: 80rpx;
+
+  display: block;
+  box-sizing: border-box;
+  width: 650rpx;
+  height: 500rpx;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*申请原因*/
+.reason {
+  display: block;
+  box-sizing: border-box;
+  width: 550rpx;
+  height: 400rpx;
+  
+  font-size: 40rpx;
+}
+
+
+/*提交按钮占位区域*/
+.bt {
+  margin-top: 80rpx;
+}
+
+/*提交按钮*/
+.SubmitButton {
+  background-color: #6d9ebf;
+  border-radius: 24rpx;
+  border: 5rpx solid #ffffff;
+
+  color: white;
+  font-size: 40rpx;
+
+  position: relative;
 }

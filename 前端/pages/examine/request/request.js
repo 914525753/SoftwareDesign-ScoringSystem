@@ -1,5 +1,8 @@
 // pages/examine/request/request.js
+// 获取应用实例
 const app = getApp();
+const domain = app.globalData.domain;
+
 Page({
   formSubmit: function(e)
   {
@@ -14,7 +17,7 @@ Page({
       }
       else var data = "description="+description+"&action=request&type=1";
       wx.request({
-        url: 'http://127.0.0.1:8080/test/ExamineJudges',
+        url: domain + "/ExamineJudges",
         header: {
           "Content-Type": "application/x-www-form-urlencoded",
           "Cookie": wx.getStorageSync('JSESSIONID')

@@ -124,7 +124,7 @@ Page({
       })
       setTimeout(function () {
         wx.redirectTo({
-          url: "/pages/accept/accept" // 管理员登录后直接进入accept页
+          url: "/pages/examine/accept/accept" // 管理员登录后直接进入accept页
         })
       }, 1000)
     }

@@ -119,18 +119,11 @@ public class LoginServlet2 extends HttpServlet {
                     ResultSet SelectIdRs = pstmt.executeQuery();
                     while (SelectIdRs.next())
                     {
-                        request.getSession().setAttribute("userid", SelectIdRs.getString("userid"));
-                        request.getSession().setAttribute("level", SelectIdRs.getString("level"));
-                    }
-
-                    out.write("1"); //1代表登录成功
-                    if(SelectIdRs.getString("level").equals("3"))
-                    {
-                        out.write("9");//为管理员
-                    }
-                    else
-                    {
-                        out.write("8");//不为管理员
+                        HttpSession session = request.getSession();
+                        session.setAttribute("userid", SelectIdRs.getString("userid"));
+                        session.setAttribute("level", SelectIdRs.getString("level"));
+                        out.write("1"); //1代表登录成功
+                        out.write(SelectIdRs.getString("level"));
                     }
                     SelectIdRs.close();
                 }
@@ -206,14 +199,7 @@ public class LoginServlet2 extends HttpServlet {
                         session.setAttribute("userid", rs.getString("userid"));
                         session.setAttribute("level", rs.getString("level"));
                         out.write("1");
-                        if(rs.getString("level").equals("3"))
-                        {
-                            out.write("9");//为管理员
-                        }
-                        else
-                        {
-                            out.write("8");//不为管理员
-                        }
+                        out.write(rs.getString("level"));
                         IsLogin=true;
                         break;
                     }

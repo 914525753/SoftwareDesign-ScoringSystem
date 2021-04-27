@@ -137,12 +137,25 @@ public class AddScore extends HttpServlet{
 
                     for(int i=0;i<vec.size();i++)
                     {
-                        String BracketSql ="update competitor set score = '[]' where userid = ?;";
-                        pstmt = conn.prepareStatement(BracketSql);
-                        pstmt.setInt(1, Integer.parseInt(String.valueOf(vec.get(i))));
-                        int BracketRows = pstmt.executeUpdate();
+                        int length=0;
+                        String IsNullSql = "select json_length(score) as length FROM competitor where userid = ?;";
+                        pstmt = conn.prepareStatement(IsNullSql);
+                        pstmt.setInt(1,Integer.parseInt(String.valueOf(vec.get(i))));
+                        ResultSet IsNullRs = pstmt.executeQuery();
+                        while (IsNullRs.next())
+                        {
+                            length=IsNullRs.getInt("length");
+                            if(Objects.equals(length, 0))
+                            {
+                                String BracketSql ="update competitor set score = '[]' where userid = ?;";
+                                pstmt = conn.prepareStatement(BracketSql);
+                                pstmt.setInt(1, Integer.parseInt(String.valueOf(vec.get(i))));
+                                int BracketRows = pstmt.executeUpdate();
+                            }
+                            System.out.print(length);
+                        }
                         //插入比赛
-                        String InsertSql="update competitor set score = JSON_ARRAY_INSERT(score,'$[0]','"+SplitContest[2]+"') where userid = ?;";
+                        String InsertSql="update competitor set score = JSON_ARRAY_INSERT(score,'$["+length+"]','"+SplitContest[2]+"') where userid = ?;";
                         pstmt = conn.prepareStatement(InsertSql);
                         pstmt.setInt(1, Integer.parseInt(String.valueOf(vec.get(i))));
                         int InsertRows = pstmt.executeUpdate();
@@ -151,6 +164,7 @@ public class AddScore extends HttpServlet{
                         } else {
                             IsContest=false;
                         }
+
 
                         //求分数平均数
                         String SelectSql="SELECT AVG(`"+vec.get(i)+"`) AS AVG_Score FROM "+map.get("ContestName")+";";
@@ -162,6 +176,7 @@ public class AddScore extends HttpServlet{
                             //插入TreeMap中key自动从大到小排序
                             TreeMap.put(AVG_Score, String.valueOf(vec.get(i)));
                         }
+                        IsNullRs.close();
                         AVG_rs.close();
                     }
 
@@ -170,21 +185,28 @@ public class AddScore extends HttpServlet{
                     for(Map.Entry<Integer,String> entry : entrySet){
                         Integer key = entry.getKey();
                         String value = entry.getValue();
+                        String IsNullSql2 = "select json_length(score) as length FROM competitor where userid = ?;";
+                        pstmt = conn.prepareStatement(IsNullSql2);
+                        pstmt.setInt(1,Integer.parseInt(value));
+                        ResultSet IsNullRs2 = pstmt.executeQuery();
+                        while (IsNullRs2.next()) {
+                            int length2 = IsNullRs2.getInt("length");
+                            length2--;
+                            //插入分数和排名
+                            String AppendSql="update competitor set score = JSON_ARRAY_APPEND(score,'$["+length2+"]','"+key+"'),score= JSON_ARRAY_APPEND(score,'$["+length2+"]','"+ranking+"') where userid = ?;";
+                            pstmt = conn.prepareStatement(AppendSql);
+                            pstmt.setInt(1, Integer.parseInt(value));
+                            int AppendRows = pstmt.executeUpdate();
+                            if(AppendRows > 0)
+                            {
 
-                        //插入分数和排名
-                        String AppendSql="update competitor set score = JSON_ARRAY_APPEND(score,'$[0]','"+key+"'),score= JSON_ARRAY_APPEND(score,'$[0]','"+ranking+"') where userid = ?;";
-                        pstmt = conn.prepareStatement(AppendSql);
-                        pstmt.setInt(1, Integer.parseInt(value));
-                        int AppendRows = pstmt.executeUpdate();
-                        if(AppendRows > 0)
-                        {
-
+                            }
+                            else
+                            {
+                                IsAVG=false;
+                            }
+                            ranking--;
                         }
-                        else
-                        {
-                            IsAVG=false;
-                        }
-                        ranking--;
                     }
                 }
                 if(IsAdd==true)

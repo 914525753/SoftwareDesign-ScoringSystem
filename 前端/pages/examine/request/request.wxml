@@ -1,8 +1,8 @@
 <!--pages/examine/request/request.wxml-->
-<text>申请提交\n\n</text>
 <form bindsubmit="formSubmit">
-  <textarea class = "areas" placeholder = "请输入申请的原因" name = "textarea"></textarea>
-  <text>\n</text>
-  <button form-type="submit"> 提交 </button>
+  <view class="container-request">
+    <view class="flex-block title">申请理由</view>
+    <view class="flex-block areas"><textarea class="reason" name="textarea" placeholder="请输入申请的原因" placeholder-style="font-size: 40rpx;"></textarea></view>
+    <view class="flex-block bt"><button class="SubmitButton" form-type="submit">提交</button></view>
+  </view>
 </form>
-
