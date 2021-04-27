@@ -1,4 +1,4 @@
-<!--index.wxml-->
+<!--pages/index/index.wxml-->
 <view class="index">
   
   <view class="header" style="position: relative; left: 0rpx; top: 26rpx">
@@ -8,8 +8,8 @@
       
       <view class="userinfo-nickname">{{nickName}}</view>
 
-      <view class="textBottom">
-        <view class="text">参加比赛项目数:xx</view>
+      <view wx:if="{{onLine}}" class="textBottom">
+        <view class="text">参加比赛项目数:{{joining}}</view>
         <image src="/image/message.png"></image>
       </view>
     </view>
@@ -21,21 +21,21 @@
 
   <view class="topImg">
     <view style="display:flex;justify-content:space-between">
-      <view class="imageHidden" style="width: 321rpx; height: 408rpx;overflow:hidden;border-radius:10rpx;display:inline-block">
+      <view hover-class="btn-hover" class="imageHidden" style="width: 321rpx; height: 408rpx;overflow:hidden;border-radius:10rpx;display:inline-block">
         <image class="batton_1" src="/image/attend1.png" bindtap="NavToShow" style=" "></image>
       </view>
       
-      <view class="imageHidden" style="width: 300rpx; height: 300rpx; overflow:hidden;border-radius:10rpx;display:inline-block">
-        <image class="batton_1" src="/image/batton2.png" style=" "></image>
+      <view hover-class="btn-hover" class="imageHidden" style="width: 300rpx; height: 300rpx; overflow:hidden;border-radius:10rpx;display:inline-block">
+        <image class="batton_1" src="/image/batton2.png" bindtap="NavToCreate" style=" "></image>
       </view>
     </view>
     
     <view style="display:flex;justify-content:space-between">
-      <view class="imageHidden" style="width: 321rpx; height: 300rpx; overflow:hidden;border-radius:10rpx;display:inline-block;margin-top:24rpx">
-        <image class="batton_1" src="/image/batton3.png" style="position: relative; left: 0rpx; top: 15rpx"></image>
+      <view hover-class="btn-hover" class="imageHidden" style="width: 321rpx; height: 300rpx; overflow:hidden;border-radius:10rpx;display:inline-block;margin-top:24rpx">
+        <image class="batton_1" src="/image/batton3.png" bindtap="NavToAccept" style="position: relative; left: 0rpx; top: 15rpx"></image>
       </view>
-      <view class="imageHidden" style="width: 300rpx; height: 408rpx;overflow:hidden;border-radius:10rpx;display:inline-block;margin-top:-88rpx">
-        <image class="batton_1" src="/image/batton4.png" style="position: relative; left: 0rpx; border-radius: 10rpx; top: 20rpx"></image>
+      <view hover-class="btn-hover" class="imageHidden" style="width: 300rpx; height: 408rpx;overflow:hidden;border-radius:10rpx;display:inline-block;margin-top:-88rpx">
+        <image class="batton_1" src="/image/batton4.png" bindtap="NavToPersonal" style="position: relative; left: 0rpx; border-radius: 10rpx; top: 20rpx"></image>
       </view>
     </view>
   

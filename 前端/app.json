@@ -2,17 +2,18 @@
   "pages": [
     "pages/index/index",
     "pages/login/login-before",
+    "pages/login/signup/signup",
     "pages/login/login/login",
     "pages/login/login-wx/login-wx",
-    "pages/login/signup/signup",
     "pages/show/show",
     "pages/show/tpl/show-tpl",
-    "pages/personal/personal",
-    "pages/personal/tpl/personal-tpl",
+    "pages/create/create",
 	  "pages/examine/request/request",
     "pages/examine/accept/accept",
     "pages/examine/accept/tpl/accept-tpl",
-    "pages/create/create"
+    "pages/personal/personal",
+    "pages/personal/tpl/personal-tpl",
+    "pages/score/score"
   ],
   "window": {
     "backgroundTextStyle": "light",

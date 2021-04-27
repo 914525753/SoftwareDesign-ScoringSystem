@@ -1,5 +1,6 @@
 // pages/personal/personal.js
 const app = getApp();
+const domain = app.globalData.domain;
 
 Page({
   /**

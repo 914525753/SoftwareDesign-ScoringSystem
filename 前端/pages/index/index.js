@@ -1,6 +1,7 @@
-// index.js
+// pages/index/index.js
 // 获取应用实例
 const app = getApp()
+const domain = app.globalData.domain;
 
 Page({
   
@@ -10,7 +11,8 @@ Page({
   data: {
     onLine: false,
     nickName: "请点击头像登录",
-    avatar: "https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132"
+    avatar: "https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132",
+    joining: "0"
   },
 
   // 事件处理函数
@@ -24,7 +26,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    
+
     // 有Cookie则设为在线状态
     if (wx.getStorageSync('JSESSIONID') != "") {
       this.setData({
@@ -46,8 +48,33 @@ Page({
           nickName: wx.getStorageSync('username'),
         })
       }
-    }
 
+      this.ShowJoining(); // 显示当前用户参与的比赛
+    }
+    
+  },
+
+  /*显示当前用户参与的比赛*/
+  ShowJoining: function () {
+    var that = this;
+
+    wx.request({
+      url: domain + "/ShowJoining",
+      data:{},
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "Cookie": wx.getStorageSync('JSESSIONID'),
+      },
+      success: function (res) {
+        console.log("......Successful Request......");
+        console.log(res.data);
+        
+        that.setData({
+          joining: res.data,
+        })
+      },
+    })
   },
 
   /**
@@ -75,14 +102,14 @@ Page({
 
 
   /*按钮事件 - 打开登录面板*/
-  ToLogin: function() {
+  ToLogin: function () {
     wx.navigateTo({
       url: "/pages/login/login-before",
     })
   },
 
   /*按钮事件 - 退出账户*/
-  LogOut: function() {
+  LogOut: function () {
     wx.showModal({
       title: "是否退出当前账号？",
       success (res) {
@@ -99,9 +126,30 @@ Page({
   },
 
   /*按钮事件 - 打开参赛页*/
-  NavToShow: function() {
+  NavToShow: function () {
     wx.navigateTo({
       url: "/pages/show/show",
+    })
+  },
+
+  /*按钮事件 - 打开创建比赛页*/
+  NavToCreate: function () {
+    wx.navigateTo({
+      url: "/pages/create/create",
+    })
+  },
+
+  /*按钮事件 - 打开评委权限审核页*/
+  NavToAccept: function () {
+    wx.navigateTo({
+      url: "/pages/examine/accept/accept",
+    })
+  },
+
+  /*按钮事件 - 打开管理比赛页*/
+  NavToPersonal: function () {
+    wx.navigateTo({
+      url: "/pages/personal/personal",
     })
   },
   

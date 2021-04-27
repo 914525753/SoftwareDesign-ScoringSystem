@@ -1,4 +1,4 @@
-/**index.wxss**/
+/**pages/index/index.wxss**/
 
 page {
   background: #c9e9fe;
@@ -81,4 +81,10 @@ image {
   left: 10rpx;
   top: 10rpx;
   z-index: 7;
+}
+
+.btn-hover {
+  position: relative;
+  top: 3rpx;
+  box-shadow: 0px 0px 8px #999999 inset;
 }
