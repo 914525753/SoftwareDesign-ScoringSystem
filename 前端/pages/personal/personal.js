@@ -12,6 +12,16 @@ Page({
     judge: false,
   },
 
+  Enter:function(event)
+  {
+    var id = event.currentTarget.dataset.id;
+    var name = event.currentTarget.dataset.name;
+    wx.redirectTo({
+      url: "/pages/score/score?id=" + id + "&&name=" + name
+    })
+  },
+  
+
   Lock:function(event)
   {
     var id = event.currentTarget.dataset.id;
