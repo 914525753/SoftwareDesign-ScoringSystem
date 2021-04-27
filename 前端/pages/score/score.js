@@ -19,8 +19,13 @@ Page({
   onLoad: function (options) {
     app.Check()
 
-    var ContestId = options.ContestId; // 接收ContestId
-    var ContestName = options.ContestName; //接收ContestName
+    var ContestId = options.id; // 接收ContestId
+    var ContestName = options.name; //接收ContestName
+
+    //var ContestId = "10";
+    //var ContestName = "比赛10";
+
+    wx.setStorageSync('ContestId', ContestId)
     this.setData({
       ContestId: ContestId,
       ContestName: ContestName
@@ -86,7 +91,7 @@ Page({
     wx.request({
       url: domain + "/QueryScore",
       data:{
-        "ContestId": ContestId,
+        "ContestId": wx.getStorageSync('ContestId'),
       },
       method: 'POST',
       header: {

@@ -4,7 +4,7 @@
     <view class="topBlock">
       <view class="ContestName">比赛名称：</view>
       <view class="ContestName">{{ContestName}}</view>
-      <input class="ContestId" name="ContestId" value="{{ContestId}}" hidden="hidden"></input>
+      <input class="ContestId" name="ContestName" value="contest{{ContestId}}" hidden="hidden"></input>
     </view>
   </view>
 
