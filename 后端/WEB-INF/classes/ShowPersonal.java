@@ -20,11 +20,11 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/ShowPersonal")
 public class ShowPersonal extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    // JDBC é©±åŠ¨ååŠæ•°æ®åº“ URL
+    // JDBC Çı¶¯Ãû¼°Êı¾İ¿â URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
     static final String DB_URL = "jdbc:mysql://localhost:3306/bearcome?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8";
     
-    // æ•°æ®åº“çš„ç”¨æˆ·åä¸å¯†ç ï¼Œéœ€è¦æ ¹æ®è‡ªå·±çš„è®¾ç½®
+    // Êı¾İ¿âµÄÓÃ»§ÃûÓëÃÜÂë£¬ĞèÒª¸ù¾İ×Ô¼ºµÄÉèÖÃ
     static final String USER = "root";
     static final String PASS = "";
     /**
@@ -41,14 +41,14 @@ public class ShowPersonal extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        // è®¾ç½®å“åº”å†…å®¹ç±»å‹
+        // ÉèÖÃÏìÓ¦ÄÚÈİÀàĞÍ
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try{
-            // æ³¨å†Œ JDBC é©±åŠ¨å™¨
+            // ×¢²á JDBC Çı¶¯Æ÷
             Class.forName(JDBC_DRIVER);
             
-            // æ‰“å¼€ä¸€ä¸ªè¿æ¥
+            // ´ò¿ªÒ»¸öÁ¬½Ó
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             int userid = Integer.parseInt(request.getSession().getAttribute("userid").toString());
@@ -86,7 +86,7 @@ public class ShowPersonal extends HttpServlet {
             {
                 sql = "SELECT GROUP_CONCAT(partake,createpartake) AS partake FROM judge where userid=?;";
             }
-            // æ‰§è¡Œ SQL æŸ¥è¯¢
+            // Ö´ĞĞ SQL ²éÑ¯
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,userid);
             ResultSet rs = pstmt.executeQuery();
@@ -104,7 +104,7 @@ public class ShowPersonal extends HttpServlet {
                     String id  = rs.getString("id");
                     String name = rs.getString("name");
                     String description = rs.getString("description");
-                    /*è¿™é‡Œè·å–å¹³å‡åˆ†å’Œæ’å
+                    /*ÕâÀï»ñÈ¡Æ½¾ù·ÖºÍÅÅÃû
                     if(level == 1)
                     {
                         String id2 = "$." + id;
@@ -147,6 +147,8 @@ public class ShowPersonal extends HttpServlet {
                         "\",\"description\":\"" + description +
                         "\"};");
                     }
+                    score=null;
+                    rank=null;
                 }
             }
             if(level > 1)
@@ -154,18 +156,18 @@ public class ShowPersonal extends HttpServlet {
                 out.println("isJudge");
             }           
 
-            // å®Œæˆåå…³é—­
+            // Íê³Éºó¹Ø±Õ
             rs.close();
             pstmt.close();
             conn.close();
         } catch(SQLException se) {
-            // å¤„ç† JDBC é”™è¯¯
+            // ´¦Àí JDBC ´íÎó
             se.printStackTrace();
         } catch(Exception e) {
-            // å¤„ç† Class.forName é”™è¯¯
+            // ´¦Àí Class.forName ´íÎó
             e.printStackTrace();
         }finally{
-            // æœ€åæ˜¯ç”¨äºå…³é—­èµ„æºçš„å—
+            // ×îºóÊÇÓÃÓÚ¹Ø±Õ×ÊÔ´µÄ¿é
             try{
                 if(pstmt!=null)
                 pstmt.close();
