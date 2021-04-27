@@ -72,7 +72,7 @@ Page({
     app.Check();
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/test/ShowPersonal',
+      url: domain + '/ShowPersonal',
       header: {
         'content-type': 'application/json' ,
         "Cookie": wx.getStorageSync('JSESSIONID')

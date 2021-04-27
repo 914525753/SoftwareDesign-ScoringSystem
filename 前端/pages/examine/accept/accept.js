@@ -1,12 +1,13 @@
 // pages/examine/accept/accept.js
 const app = getApp();
+const domain = app.globalData.domain;
 
 Page({
   Accept:function(can,index)
   {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/test/ExamineJudges',
+      url: domain + '/ExamineJudges',
       header: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": wx.getStorageSync('JSESSIONID')
@@ -80,7 +81,7 @@ Page({
     app.Check();
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/test/ExamineJudges',
+      url: domain + '/ExamineJudges',
       header: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Cookie": wx.getStorageSync('JSESSIONID')

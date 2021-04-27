@@ -6,6 +6,11 @@
     <text>描述：{{description}}\n</text>
     <view wx:if="{{score}}">
       <text>分数：{{score}}\n</text>
+      <text>排名：{{rank}}</text>
+    </view>
+    <view wx:if="{{judge}}">
+      <button bindtap="Lock" data-id="{{id}}" data-lock="jLock">评委锁定</button>
+      <button bindtap="Lock" data-id="{{id}}" data-lock="cLock">参赛者锁定</button>
     </view>
   </view>
 </template>
