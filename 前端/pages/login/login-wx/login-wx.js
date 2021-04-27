@@ -81,6 +81,13 @@ Page({
                   duration: 3000
                 })
               }
+              else if(res.data == "5") {
+                wx.showToast({
+                  title: "Code换取失败",
+                  icon: 'none',
+                  duration: 3000
+                })
+              }
           
             },
           })

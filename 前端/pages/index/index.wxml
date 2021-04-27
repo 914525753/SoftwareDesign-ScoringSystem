@@ -10,7 +10,7 @@
 
       <view wx:if="{{onLine}}" class="textBottom">
         <view class="text">参加比赛项目数:{{joining}}</view>
-        <image src="/image/message.png" bindtap="NavToRequest"></image>
+        <image src="/image/message.png" bindtap="NavToAccept"></image>
       </view>
     </view>
 
@@ -32,7 +32,7 @@
     
     <view style="display:flex;justify-content:space-between">
       <view hover-class="btn-hover" class="imageHidden" style="width: 321rpx; height: 300rpx; overflow:hidden;border-radius:10rpx;display:inline-block;margin-top:24rpx">
-        <image class="batton_1" src="/image/batton3.png" bindtap="NavToAccept" style="position: relative; left: 0rpx; top: 15rpx"></image>
+        <image class="batton_1" src="/image/batton3.png" bindtap="NavToRequest" style="position: relative; left: 0rpx; top: 15rpx"></image>
       </view>
       <view hover-class="btn-hover" class="imageHidden" style="width: 300rpx; height: 408rpx;overflow:hidden;border-radius:10rpx;display:inline-block;margin-top:-88rpx">
         <image class="batton_1" src="/image/batton4.png" bindtap="NavToPersonal" style="position: relative; left: 0rpx; border-radius: 10rpx; top: 20rpx"></image>
