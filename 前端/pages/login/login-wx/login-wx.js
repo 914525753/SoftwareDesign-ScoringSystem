@@ -63,7 +63,7 @@ Page({
               console.log(cookie)
           
               // 页面交互逻辑
-              if (res.data == "11" || res.data == "12" || res.data == "31") {
+              if (res.data == "1" || res.data == "3") {
                 wx.showToast({
                   title: "微信登录成功",
                   duration: 1000
