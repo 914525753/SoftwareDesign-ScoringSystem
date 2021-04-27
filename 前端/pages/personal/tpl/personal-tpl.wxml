@@ -3,14 +3,15 @@
   <view class="content">  
     <text>ID：{{id}}\n</text>
     <text>名称：{{name}}\n</text>
-    <text>描述：{{description}}\n</text>
+    <text>描述：{{description}}\n\n</text>
     <view wx:if="{{score}}">
       <text>分数：{{score}}\n</text>
       <text>排名：{{rank}}</text>
     </view>
-    <view wx:if="{{judge}}">
-      <button bindtap="Lock" data-id="{{id}}" data-lock="jLock">评委锁定</button>
-      <button bindtap="Lock" data-id="{{id}}" data-lock="cLock">参赛者锁定</button>
+    <view class="list" wx:if="{{judge}}">
+      <button class="button_1" bindtap="Lock" data-id="{{id}}" data-lock="jLock">评委锁定</button>
+      <button class="button_2" bindtap="Lock" data-id="{{id}}" data-lock="cLock">参赛者锁定</button>
+      <button class="button_1" bindtap="Enter" data-id="{{id}}" data-name="{{name}}">进入评分</button>
     </view>
   </view>
 </template>
