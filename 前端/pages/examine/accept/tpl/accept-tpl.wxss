@@ -18,3 +18,21 @@
   position: relative;
   left: 30%;
 }
+
+.content{
+    background:#5b6faa;
+    color:white;
+    width: 550rpx;
+    height: 400rpx;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0rpx 8rpx 12rpx 2rpx #4b4b4b;
+    display: flex;
+    flex-direction: column;
+    margin-top:20rpx;
+  }
+
+  .css{
+    left: 5%;
+    margin-top:2rpx;
+  }

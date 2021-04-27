@@ -1,2 +1,6 @@
 /* pages/show/show.wxss */
 @import "tpl/show-tpl.wxss"; /*css模块化，引用模块*/
+
+page{
+  background: #c9e9fe;
+}

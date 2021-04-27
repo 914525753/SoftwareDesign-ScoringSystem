@@ -1,2 +1,3 @@
-/* pages/examine/accept/accept.wxss */
-@import "tpl/accept-tpl.wxss"; /*css模块化，引用模块*/
+page{
+  background: #c9e9fe;
+}

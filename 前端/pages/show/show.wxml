@@ -1,5 +1,6 @@
 <!--pages/show/show.wxml-->
 <import src="tpl/show-tpl.wxml"/> <!--使用import引用模块postItemTpl的文件绝对路径-->
+
 <block wx:for="{{list}}" wx:for-item="item" wx:for-index="idx">  <!--利用wx:for循环输出js中的数据-->
   <!--tap事件能注册在view上，但不能注册在block、template上-->
     <template is="showItemTpl" data="{{...item}}"></template>
