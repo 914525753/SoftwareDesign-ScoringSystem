@@ -1,2 +1,5 @@
 /* pages/personal/personal.wxss */
 @import "tpl/personal-tpl.wxss"; /*css模块化，引用模块*/
+page{
+  background: #c9e9fe;
+}

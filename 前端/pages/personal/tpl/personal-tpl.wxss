@@ -1,6 +1,35 @@
 /* pages/personal/tpl/personal-tpl.wxss */
-.content button
-{
-  position: relative;
-  left: 25%;
+.content{
+    background:#5b6faa;
+    color:white;
+    width: 550rpx;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0rpx 8rpx 12rpx 2rpx #4b4b4b;
+    display: flex;
+    flex-direction: column;
+    margin-top:20rpx;
+    margin-left: 11%;
+}
+
+.button_2{
+  width: 180rpx;
+  height: 80rpx;
+  float: left;
+  font-size: 27rpx;
+  margin-left: 10rpx;
+  box-shadow: 0rpx 8rpx 0rpx 0rpx #4b4b4b;
+}
+
+.button_1{
+  width: 170rpx;
+  height: 80rpx;
+  float: left;
+  font-size: 27rpx;
+  margin-left: 10rpx;
+  box-shadow: 0rpx 8rpx 0rpx 0rpx #4b4b4b;
+}
+
+.list{
+  float: left;
 }
