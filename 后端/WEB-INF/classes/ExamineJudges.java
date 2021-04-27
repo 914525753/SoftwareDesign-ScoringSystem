@@ -64,7 +64,8 @@ public class ExamineJudges extends HttpServlet {
                 HttpSession session = request.getSession();
                 if(action.equals("show")) //显示申请信息
                 {
-                    if(Integer.parseInt(session.getAttribute("level").toString()) >= 2)
+                    level = Integer.parseInt(session.getAttribute("level").toString());
+                    if(level >= 2)
                     {
                         if(type == 2)
                         {
@@ -108,7 +109,7 @@ public class ExamineJudges extends HttpServlet {
                         rs = pstmt.executeQuery();
                         while(rs.next())
                         {
-                            if(id != -1 && userid !=-1 && description != "" && index != -1) //初值不具有任何意义，仅绕过java的编译检查
+                            if(userid !=-1 && description != "" && index != -1) //初值不具有任何意义，仅绕过java的编译检查
                             {
                                 String name = rs.getString("name");
                                 if(type == 2)
@@ -197,7 +198,8 @@ public class ExamineJudges extends HttpServlet {
                 }
                 else if(action.equals("accept")) //审核申请
                 {
-                    if(Integer.parseInt(session.getAttribute("level").toString()) >= 2)
+                    level = Integer.parseInt(session.getAttribute("level").toString());
+                    if(level >= 2)
                     {
                         index = Integer.parseInt(request.getParameter("index"));
                         sql = "SELECT * FROM examine where index1=? and type=?";
