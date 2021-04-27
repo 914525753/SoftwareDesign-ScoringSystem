@@ -1,0 +1,103 @@
+page{
+  background: #c9e9fe;
+}
+
+.card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.all{
+  background:#5b6faa;
+  color:white;
+  width: 550rpx;
+  height: 400rpx;
+  position: relative;
+  top: 34rpx;
+  border-radius: 15px;
+  box-shadow: 0rpx 8rpx 12rpx 2rpx #4b4b4b;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor{
+  width: 52rpx; 
+  height: 52rpx; 
+  display: block; 
+  box-sizing: border-box; 
+  left: NaNrpx; 
+  top: NaNrpx;
+  left: -40rpx;
+}
+
+.ID{
+  position: relative; 
+  left: 16rpx; 
+  top: 26rpx; 
+  width: 506rpx; 
+  height: 48rpx; 
+  display: block; 
+  box-sizing: border-box
+}
+
+.name{
+  position: relative; 
+  left: 15rpx; 
+  top: 26rpx; 
+  width: 506rpx; 
+  height: 58rpx; 
+  display: block; 
+  box-sizing: border-box;
+}
+
+.describe{
+  width: 506rpx; 
+  height: 130rpx; 
+  display: block; 
+  box-sizing: border-box; 
+  left: 15rpx; 
+  top: 26rpx; 
+  position: relative
+}
+
+.deadline{
+  position: relative; 
+  left: 15rpx; 
+  top: 26rpx; 
+  width: 506rpx; 
+  height: 104rpx; 
+  display: block; 
+  box-sizing: border-box
+}
+
+.nowNumber{
+  position: relative; 
+  left: 15rpx; 
+  top: 26rpx; 
+  width: 506rpx; 
+  height: 48rpx; 
+  display: block; 
+  box-sizing: border-box
+}
+
+.maxNumber{
+  position: relative; 
+  left: 16rpx; 
+  top: 27rpx; 
+  width: 446rpx; 
+  height: 48rpx; 
+  display: block; 
+  box-sizing: border-box
+}
+
+.editor{
+  width: 52rpx; 
+  height: 70rpx; 
+  display: block; 
+  box-sizing: border-box; 
+  left: 462rpx; 
+  top: -30rpx;
+  position: relative
+}

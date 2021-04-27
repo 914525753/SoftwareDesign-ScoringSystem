@@ -1,0 +1,14 @@
+<!--pages/examine/accept/tpl/accept-tpl.wxml-->
+<template name="acceptItemTpl"> <!--将template的内容整合成一个模块-->
+  <view class="content">  
+    <text>用户ID：{{userid}}\n</text>
+    <text>名称：{{name}}\n</text>
+    <text>描述：{{description}}\n</text>
+    <view wx:if="{{type}}==2">
+      <text>比赛ID：{{id}}\n</text>
+      <text>比赛名称：{{contestname}}\n</text>
+    </view>
+    <button style="width:35%" class = "btn1"  bindtap = "Cando" data-index = "{{index}}" data-can = "yes">允许</button>
+    <button style="width:35%" class = "btn2"  bindtap = "Cando" data-index = "{{index}}" data-can = "no">不允许</button>
+  </view>
+</template>

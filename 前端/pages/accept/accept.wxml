@@ -1,0 +1,19 @@
+<!--pages/examine/accept/accept.wxml-->
+<import src="tpl/accept-tpl.wxml"/>
+<block wx:for="{{list}}" wx:for-item="item" wx:for-index="idx"> 
+    <template is="acceptItemTpl" data="{{...item}}"></template>
+</block>
+<text class = "text1" wx:if = "{{none == true}}">暂无数据</text>  
+
+<view class="card">
+  <view class="all">
+    <view class="ID">ID：</view>
+    <view class="name">名称：</view>
+    <view class="describe">描述：</view>
+    <view class="deadline">评审时间：</view>
+    <view class="nowNumber">当前参赛人数：</view>
+    <view class="maxNumber">最大参赛人数：</view>
+    <image class="editor" src="/image/editor.png"></image>
+  </view>
+</view>
+
