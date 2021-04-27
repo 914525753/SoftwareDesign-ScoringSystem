@@ -18,11 +18,11 @@ import java.util.Date;
 @WebServlet("/ExamineJudges")
 public class ExamineJudges extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    // JDBC Çı¶¯Ãû¼°Êı¾İ¿â URL
+    // JDBC é©±åŠ¨ååŠæ•°æ®åº“ URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
     static final String DB_URL = "jdbc:mysql://localhost:3306/bearcome?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8";
     
-    // Êı¾İ¿âµÄÓÃ»§ÃûÓëÃÜÂë£¬ĞèÒª¸ù¾İ×Ô¼ºµÄÉèÖÃ
+    // æ•°æ®åº“çš„ç”¨æˆ·åä¸å¯†ç ï¼Œéœ€è¦æ ¹æ®è‡ªå·±çš„è®¾ç½®
     static final String USER = "root";
     static final String PASS = ""; 
     /**
@@ -40,13 +40,14 @@ public class ExamineJudges extends HttpServlet {
         Connection conn = null;
         PreparedStatement pstmt = null;
         PrintWriter out = response.getWriter();
+        request.setCharacterEncoding("UTF-8");
         ResultSet rs = null;
-        // ÉèÖÃÏìÓ¦ÄÚÈİÀàĞÍ
+        // è®¾ç½®å“åº”å†…å®¹ç±»å‹
         response.setContentType("text/html;charset=UTF-8");
         try{
-            // ×¢²á JDBC Çı¶¯Æ÷
+            // æ³¨å†Œ JDBC é©±åŠ¨å™¨
             Class.forName(JDBC_DRIVER);
-            // ´ò¿ªÒ»¸öÁ¬½Ó
+            // æ‰“å¼€ä¸€ä¸ªè¿æ¥
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             if(request.getParameter("action") != null)
             {
@@ -62,7 +63,7 @@ public class ExamineJudges extends HttpServlet {
                 String partake2 = "";
                 int index = -1;
                 HttpSession session = request.getSession();
-                if(action.equals("show")) //ÏÔÊ¾ÉêÇëĞÅÏ¢
+                if(action.equals("show")) //æ˜¾ç¤ºç”³è¯·ä¿¡æ¯
                 {
                     level = Integer.parseInt(session.getAttribute("level").toString());
                     if(level >= 2)
@@ -109,7 +110,7 @@ public class ExamineJudges extends HttpServlet {
                         rs = pstmt.executeQuery();
                         while(rs.next())
                         {
-                            if(userid !=-1 && description != "" && index != -1) //³õÖµ²»¾ßÓĞÈÎºÎÒâÒå£¬½öÈÆ¹ıjavaµÄ±àÒë¼ì²é
+                            if(userid !=-1 && description != "" && index != -1) //åˆå€¼ä¸å…·æœ‰ä»»ä½•æ„ä¹‰ï¼Œä»…ç»•è¿‡javaçš„ç¼–è¯‘æ£€æŸ¥
                             {
                                 String name = rs.getString("name");
                                 if(type == 2)
@@ -142,12 +143,12 @@ public class ExamineJudges extends HttpServlet {
                         }
                     }
                 }
-                else if(action.equals("request")) //ÓÃ»§ÉêÇë
+                else if(action.equals("request")) //ç”¨æˆ·ç”³è¯·
                 {
                     description = request.getParameter("description");
                     userid = Integer.parseInt(session.getAttribute("userid").toString());
                     level = Integer.parseInt(session.getAttribute("level").toString());
-                    if(userid != -1 && level == 1)
+                    if(userid != -1)
                     {
                         if(type == 2)
                         {
@@ -178,7 +179,7 @@ public class ExamineJudges extends HttpServlet {
                                 pstmt.setInt(4,id);
                                 pstmt.executeUpdate();
 
-                                out.println(1); //Ìá½»³É¹¦
+                                out.println(1); //æäº¤æˆåŠŸ
                             }
                             else if(type == 1 && level == 1)
                             {
@@ -189,14 +190,14 @@ public class ExamineJudges extends HttpServlet {
                                 pstmt.setInt(3,1);
                                 pstmt.executeUpdate();
 
-                                out.println(1); //Ìá½»³É¹¦
+                                out.println(1); //æäº¤æˆåŠŸ
                             }
-                            else out.println(5); //´íÎóÌá½»
+                            else out.println(5); //é”™è¯¯æäº¤
                         }
-                        else out.println(2); //ÒÑ¾­Ìá½»
+                        else out.println(2); //å·²ç»æäº¤
                     }
                 }
-                else if(action.equals("accept")) //ÉóºËÉêÇë
+                else if(action.equals("accept")) //å®¡æ ¸ç”³è¯·
                 {
                     level = Integer.parseInt(session.getAttribute("level").toString());
                     if(level >= 2)
@@ -267,11 +268,11 @@ public class ExamineJudges extends HttpServlet {
                                         pstmt.setInt(1,userid);
                                         pstmt.executeUpdate();
                                     }
-                                    out.println(1); //Í¨¹ıÉóºË
+                                    out.println(1); //é€šè¿‡å®¡æ ¸
                                 }
                                 else if(can.equals("no"))
                                 {
-                                    out.println(2); //¾Ü¾øÍ¨¹ı
+                                    out.println(2); //æ‹’ç»é€šè¿‡
                                 } 
                                 sql = "DELETE FROM examine WHERE index1=? and type=?";
                                 pstmt = conn.prepareStatement(sql);
@@ -279,23 +280,23 @@ public class ExamineJudges extends HttpServlet {
                                 pstmt.setInt(2,type);
                                 pstmt.executeUpdate();   
                             }
-                            else out.println(3); //ÒÑ¾­±»´¦Àí
+                            else out.println(3); //å·²ç»è¢«å¤„ç†
                         }
                     }
                 }
             }
-            // Íê³Éºó¹Ø±Õ
+            // å®Œæˆåå…³é—­
             rs.close();
             pstmt.close();
             conn.close();             
         } catch(SQLException se) {
-            // ´¦Àí JDBC ´íÎó
+            // å¤„ç† JDBC é”™è¯¯
             se.printStackTrace();
         } catch(Exception e) {
-            // ´¦Àí Class.forName ´íÎó
+            // å¤„ç† Class.forName é”™è¯¯
             e.printStackTrace();
         }finally{
-            // ×îºóÊÇÓÃÓÚ¹Ø±Õ×ÊÔ´µÄ¿é
+            // æœ€åæ˜¯ç”¨äºå…³é—­èµ„æºçš„å—
             try{
                 if(pstmt!=null)
                 pstmt.close();
