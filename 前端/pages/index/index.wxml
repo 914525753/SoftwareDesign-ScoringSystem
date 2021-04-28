@@ -9,7 +9,7 @@
       <view class="userinfo-nickname">{{nickName}}</view>
 
       <view wx:if="{{onLine}}" class="textBottom">
-        <view class="text">参加比赛项目数:{{joining}}</view>
+        <!--<view class="text">参加比赛项目数:{{joining}}</view>-->
         <image src="/image/message.png" bindtap="NavToAccept"></image>
       </view>
     </view>

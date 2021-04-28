@@ -1,5 +1,7 @@
 {
   "navigationBarBackgroundColor": "#4354a6",
   "navigationBarTextStyle":"white",
-  "navigationBarTitleText": "评委权限审核"
+  "navigationBarTitleText": "评委权限审核",
+
+  "style": "v2"
 }

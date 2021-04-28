@@ -3,5 +3,7 @@
     "mp-icon": "weui-miniprogram/icon/icon"
   },
   "navigationBarTitleText": "注册",
-  "disableScroll": true
+  "disableScroll": true,
+
+  "style": "v2"
 }

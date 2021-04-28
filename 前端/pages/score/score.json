@@ -2,5 +2,7 @@
   "usingComponents": {},
   "navigationBarTitleText": "评分",
   "navigationBarTextStyle":"white",
-  "navigationBarBackgroundColor": "#4354a6"
+  "navigationBarBackgroundColor": "#4354a6",
+
+  "style": "v2"
 }
