@@ -1,5 +1,7 @@
 {
   "navigationBarBackgroundColor": "#4354a6",
   "navigationBarTextStyle":"white",
-  "navigationBarTitleText": "加入比赛"
+  "navigationBarTitleText": "加入比赛",
+
+  "style": "v2"
 }

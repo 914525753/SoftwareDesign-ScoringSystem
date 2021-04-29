@@ -1,5 +1,7 @@
 {
   "usingComponents": {},
   "navigationBarTitleText": "微信登录",
-  "disableScroll": true
+  "disableScroll": true,
+
+  "style": "v2"
 }

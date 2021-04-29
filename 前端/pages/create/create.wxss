@@ -47,7 +47,7 @@
 
 /*输入框*/
 .textbox {
-  background: #ffffff;
+  background: #c6e7fd;
   border-radius: 15rpx;
   border: 5rpx solid #919191;
   width: 550rpx;

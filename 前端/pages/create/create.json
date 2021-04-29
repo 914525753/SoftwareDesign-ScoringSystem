@@ -2,5 +2,7 @@
   "navigationBarBackgroundColor": "#4354a6",
   "navigationBarTextStyle":"white",
   "navigationBarTitleText": "创建比赛",
-  "disableScroll": true
+  "disableScroll": true,
+
+  "style": "v2"
 }
