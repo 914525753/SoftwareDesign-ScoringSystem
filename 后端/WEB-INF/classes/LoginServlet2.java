@@ -57,8 +57,8 @@ public class LoginServlet2 extends HttpServlet {
             // 打开一个连接
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-            String appId2 = "d3gxMWJjYjJjYTgwNGFhNWVm";
-            String appSecret2 = "ZjJhMTgwNjhmYjZhMGJmMTlkZWFkMTk5NWU3Yjg2NTc=";
+            String appId2 = ";
+            String appSecret2 = "";
 
             String appId = Base64Utils.decode(appId2);
             String appSecret = Base64Utils.decode(appSecret2);
